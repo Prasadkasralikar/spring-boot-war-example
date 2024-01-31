@@ -7,13 +7,7 @@ pipeline {
         stage("Test"){
             steps{
                 // mvn test
-                sh "mvn install"
-                slackSend channel: 'youtubejenkins', message: 'Job Started'
-                
-            }
-            steps{
-                // mvn test
-                sh "mvn install"
+                sh "mvn test"
                 slackSend channel: 'youtubejenkins', message: 'Job Started'
                 
             }
@@ -29,7 +23,7 @@ pipeline {
         stage("Deploy on Test"){
             steps{
                 // deploy on container -> plugin
-                deploy adapters: [tomcat9(credentialsId: 'tomcatserverdetails1', path: '', url: 'http://192.168.0.118:8080')], contextPath: '/app', war: '**/*.war'
+                deploy adapters: [tomcat9(credentialsId: 'tomcatserverdetails1', path: '', url: 'http://43.204.236.25:8080')], contextPath: '/app', war: '**/*.war'
               
             }
             
@@ -42,7 +36,7 @@ pipeline {
             
             steps{
                 // deploy on container -> plugin
-                deploy adapters: [tomcat9(credentialsId: 'tomcatserverdetails1', path: '', url: 'http://192.168.0.119:8080')], contextPath: '/app', war: '**/*.war'
+                deploy adapters: [tomcat9(credentialsId: 'tomcatserverdetails1', path: '', url: 'http://3.110.103.141:8080')], contextPath: '/app', war: '**/*.war'
 
             }
         }
